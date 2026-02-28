@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
+  <meta name="color-scheme" content="light dark">
+  <title>Hexo 博客搭建指南 | binq</title>
+  <meta name="description" content="记录从零搭建 Hexo 博客的过程，包括主题定制、评论系统和部署方案。">
+  <meta name="author" content="binq">
+  <link rel="alternate" type="application/atom+xml" title="binq" href="/feed.xml">
+  <meta property="og:type" content="blog">
+  <meta property="og:title" content="Hexo 博客搭建指南">
+  <meta property="og:site_name" content="binq">
+  <script>
+    (function () {
+      var t = null;
+      try {
+        t = window.localStorage ? localStorage.getItem('theme') : null;
+      } catch (_err) {
+        t = null;
+      }
+      if (t) {
+        document.documentElement.setAttribute('data-theme', t);
+      } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.documentElement.setAttribute('data-theme', 'dark');
+      }
+    })();
+  </script>
+  <style>
+    html,
+    body {
+      background: #fdfdfd;
+      color: #111111;
+    }
+    html[data-theme="dark"],
+    html[data-theme="dark"] body {
+      background: #111111;
+      color: #e4e6eb;
+    }
+    @media (prefers-color-scheme: dark) {
+      html:not([data-theme="light"]),
+      html:not([data-theme="light"]) body {
+        background: #111111;
+        color: #e4e6eb;
+      }
+    }
+  </style>
+  <link rel="stylesheet" href="/css/font-face.css">
+  
+  <link rel="stylesheet" href="https://unpkg.com/gitalk@1.8.0/dist/gitalk.css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  
+<meta name="generator" content="Hexo 8.1.1"></head>
+<body>
+  <div class="bg-dots" id="bgDots"></div>
+  <div class="reading-progress" id="readingProgress"></div>
+  <header class="header">
+  <div class="header-left">
+    <div class="logo">
+      <a href="/">binq</a>
+    </div>
+    <nav class="nav-links">
+      
+      <a href="/">Home</a>
+      
+      <a href="/archives">Archives</a>
+      
+      <a href="/about">About</a>
+      
+    </nav>
+  </div>
+  <div class="header-right">
+    <button class="icon-btn" id="darkModeToggle" title="Toggle dark mode" aria-label="Toggle dark mode">
+      <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+      <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+    </button>
+    <a href="/feed.xml" class="icon-btn" title="RSS" aria-label="RSS Feed">
+      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg>
+    </a>
+  </div>
+  <div class="header-mobile-row" aria-label="Mobile quick navigation">
+    <nav class="mobile-nav-links">
+      
+      <a href="/">Home</a>
+      
+      <a href="/archives">Archives</a>
+      
+      <a href="/about">About</a>
+      
+    </nav>
+    
+    <div class="mobile-sidebar-shortcuts">
+      <button class="icon-btn mobile-context-btn" id="mobileTocTrigger" title="目录" aria-label="Open table of contents" aria-controls="tocSheet" aria-expanded="false">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="6" x2="21" y2="6"></line><line x1="7" y1="12" x2="21" y2="12"></line><line x1="7" y1="18" x2="21" y2="18"></line><line x1="3" y1="6" x2="3.01" y2="6"></line><line x1="3" y1="12" x2="3.01" y2="12"></line><line x1="3" y1="18" x2="3.01" y2="18"></line></svg>
+      </button>
+      <button class="icon-btn mobile-context-btn" id="mobileSeriesTrigger" title="系列" aria-label="Open series navigation" aria-controls="seriesSheet" aria-expanded="false">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="4" rx="1"></rect><rect x="3" y="10" width="18" height="4" rx="1"></rect><rect x="3" y="16" width="18" height="4" rx="1"></rect></svg>
+      </button>
+    </div>
+    
+  </div>
+</header>
+
+  <main class="main-container">
+    
+
+
+
+
+<aside class="sidebar-container sidebar-right">
+  <div class="sidebar-header">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="var(--text)"><path d="M10 20h4V4h-4v16zm-6 0h4v-8H4v8zM16 9v11h4V9h-4z"></path></svg>
+    系列 - 技术编程
+  </div>
+  <ul class="sidebar-list">
+    
+    <li class="sidebar-item active">
+      <a href="/2026/02/hexo-blog-setup/">Hexo 博客搭建指南</a>
+    </li>
+    
+  </ul>
+</aside>
+
+
+
+<div class="container">
+  <article class="post">
+    <div class="post-header">
+      <h1 class="post-detail-title">Hexo 博客搭建指南</h1>
+      <div class="post-detail-meta" aria-label="文章元信息">
+        <span class="meta-chip">
+          <time datetime="2026-02-12">2026-02-12</time>
+        </span>
+        
+        <span class="meta-chip">
+          <a href="/tags/Hexo/" class="category-link">#Hexo</a>
+          
+          <span class="meta-tags-more">
+            <button class="meta-tags-toggle" type="button" aria-expanded="false"
+                    aria-label="显示所有标签">+2</button>
+            <span class="meta-tags-dropdown">
+              
+              <a href="/tags/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/" class="meta-tags-dropdown-item">#博客搭建</a>
+              
+              <a href="/tags/%E5%89%8D%E7%AB%AF/" class="meta-tags-dropdown-item">#前端</a>
+              
+            </span>
+          </span>
+          
+        </span>
+        
+        <span class="meta-chip">2 字</span>
+        
+        <span class="meta-chip">约 1 分钟阅读</span>
+      </div>
+    </div>
+
+    
+
+    
+    <div class="post-cover-large">
+      <img src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=1200&q=80" alt="Hexo 博客搭建指南" width="800" height="450" loading="eager" fetchpriority="high" decoding="async">
+      
+
+<span class="cover-meta-badge cover-meta-badge--source" aria-label="封面来源信息">
+  
+  <svg class="cover-meta-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+    <path d="M12 9a3.75 3.75 0 100 7.5A3.75 3.75 0 0012 9z" />
+    <path fill-rule="evenodd" d="M9.344 3.071a49.52 49.52 0 015.312 0c.967.052 1.83.585 2.332 1.39l.821 1.317c.24.383.645.643 1.11.71.386.054.77.113 1.152.177 1.432.239 2.429 1.493 2.429 2.909V18a3 3 0 01-3 3h-15a3 3 0 01-3-3V9.574c0-1.416.997-2.67 2.429-2.909.382-.064.766-.123 1.151-.178a1.56 1.56 0 001.11-.71l.822-1.315a2.942 2.942 0 012.332-1.39zM6.75 12.75a5.25 5.25 0 1110.5 0 5.25 5.25 0 01-10.5 0zm12-1.5a.75.75 0 100-1.5.75.75 0 000 1.5z" clip-rule="evenodd" />
+  </svg>
+  
+  <span class="cover-meta-text">图片来源: Unsplash</span>
+</span>
+
+
+    </div>
+    
+
+    <div class="post-content markdown-body">
+      <p>test content</p>
+
+    </div>
+
+    
+    <div class="post-tags-footer">
+      
+      <a href="/tags/Hexo/" class="tag-item"><svg class="tag-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 01-2.83 0L2 12V2h10l8.59 8.59a2 2 0 010 2.82z"/><circle cx="7" cy="7" r="1.5" fill="currentColor" stroke="none"/></svg>Hexo</a>
+      
+      <a href="/tags/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/" class="tag-item"><svg class="tag-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 01-2.83 0L2 12V2h10l8.59 8.59a2 2 0 010 2.82z"/><circle cx="7" cy="7" r="1.5" fill="currentColor" stroke="none"/></svg>博客搭建</a>
+      
+      <a href="/tags/%E5%89%8D%E7%AB%AF/" class="tag-item"><svg class="tag-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 01-2.83 0L2 12V2h10l8.59 8.59a2 2 0 010 2.82z"/><circle cx="7" cy="7" r="1.5" fill="currentColor" stroke="none"/></svg>前端</a>
+      
+    </div>
+    
+
+    <nav class="post-nav">
+      
+      <a href="/2026/02/compound-thinking/" class="post-nav-item prev">
+        <span class="post-nav-label">上一篇</span>
+        <span class="post-nav-title">复利思维：不只是投资的秘密</span>
+      </a>
+      
+      
+      <a href="/2026/02/start-journey/" class="post-nav-item next">
+        <span class="post-nav-label">下一篇</span>
+        <span class="post-nav-title">开启个人成长记录之旅</span>
+      </a>
+      
+    </nav>
+
+    
+    <div class="post-comments">
+      <h3 class="comments-title">评论</h3>
+      
+      <p class="comment-note">未注册 GitHub？可邮件联系：<a href="mailto:binq200108@163.com">binq200108@163.com</a></p>
+      
+      <div id="gitalk-container"></div>
+    </div>
+    
+
+    <footer class="post-footer">
+      <div class="copyright">
+        <p>&copy; 2026 binq</p>
+      </div>
+    </footer>
+  </article>
+</div>
+
+  </main>
+  <footer class="site-footer">
+  <div class="footer-inner">
+    <p class="copyright">
+      &copy; 2026 - 2026 binq.
+      Powered by <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a>.
+    </p>
+  </div>
+</footer>
+
+  <!-- Back to Top -->
+  <button class="back-to-top" id="backToTop" aria-label="Back to top">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"></polyline></svg>
+  </button>
+  <!-- Selection Quote Tooltip -->
+  <div class="selection-tooltip" id="selectionTooltip" aria-hidden="true">
+    <button class="selection-tooltip-btn" id="selectionQuoteBtn" type="button">
+      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M10 11V7a1 1 0 0 0-1-1H5a1 1 0 0 0-1 1v4a1 1 0 0 0 1 1h2.5L5 17h2.5l2.5-5V7zm10 0V7a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v4a1 1 0 0 0 1 1h2.5L15 17h2.5l2.5-5V7z"/></svg>
+      引用评论
+    </button>
+  </div>
+  <!-- Mobile Bottom Sheets -->
+  <div class="mobile-sheet-backdrop" id="mobileSheetBackdrop" aria-hidden="true"></div>
+  <section class="mobile-sheet" id="tocSheet" aria-hidden="true">
+    <div class="mobile-sheet-grip"></div>
+    <div class="mobile-sheet-head">
+      <h3 class="mobile-sheet-title">目录</h3>
+      <button class="mobile-sheet-close" data-close-sheet="tocSheet" aria-label="Close toc">&times;</button>
+    </div>
+    <div class="mobile-sheet-body" id="tocSheetBody"></div>
+  </section>
+  <section class="mobile-sheet" id="seriesSheet" aria-hidden="true">
+    <div class="mobile-sheet-grip"></div>
+    <div class="mobile-sheet-head">
+      <h3 class="mobile-sheet-title" id="seriesSheetTitle">系列</h3>
+      <button class="mobile-sheet-close" data-close-sheet="seriesSheet" aria-label="Close series">&times;</button>
+    </div>
+    <div class="mobile-sheet-body" id="seriesSheetBody"></div>
+  </section>
+  <!-- Lightbox -->
+  <div id="lightbox">
+    <!-- Corner controls (theme-aware) -->
+    <span class="lb-counter" id="lbCounter"></span>
+    <button class="lb-close" id="lbClose" aria-label="Close">&times;</button>
+    <button class="lb-btn lb-prev" id="lbPrev" aria-label="Previous">&#10094;</button>
+    <button class="lb-btn lb-next" id="lbNext" aria-label="Next">&#10095;</button>
+    <!-- EXIF info bar (top center, dynamically populated) -->
+    <div class="lb-exif" id="lbExif"></div>
+    <!-- Image area -->
+    <div class="lightbox-content">
+      <img id="lightbox-img" src="" alt="">
+      <img id="lightbox-img-buffer" src="" alt="" aria-hidden="true">
+    </div>
+    <!-- Bottom toolbar (zoom + actions only) -->
+    <div class="lb-toolbar" id="lbToolbar">
+      <button class="lb-tool-btn" id="lbZoomOut" title="缩小 (-)" aria-label="缩小">
+        <svg class="lb-icon" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line><line x1="8" y1="11" x2="14" y2="11"></line></svg>
+      </button>
+      <span class="lb-info-text" id="lbZoomLevel">100%</span>
+      <button class="lb-tool-btn" id="lbZoomIn" title="放大 (+)" aria-label="放大">
+        <svg class="lb-icon" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line><line x1="11" y1="8" x2="11" y2="14"></line><line x1="8" y1="11" x2="14" y2="11"></line></svg>
+      </button>
+      <button class="lb-tool-btn" id="lbZoomReset" title="1:1 / 适应屏幕 (1)" aria-label="1:1 或适应屏幕">
+        <svg class="lb-icon" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" ry="2" stroke-width="2"></rect><text x="12" y="15" font-size="9" font-weight="bold" fill="currentColor" stroke="none" text-anchor="middle" font-family="Arial, sans-serif">1:1</text></svg>
+      </button>
+      <div class="lb-divider"></div>
+      <button class="lb-tool-btn" id="lbRotate" title="旋转" aria-label="Rotate">
+        <svg class="lb-icon" viewBox="0 0 24 24"><path d="M21 12a9 9 0 1 1-9-9c2.52 0 4.93 1 6.74 2.74L21 8"></path><path d="M21 3v5h-5"></path></svg>
+      </button>
+    </div>
+  </div>
+  <script src="/js/main.js"></script>
+  
+  <script src="https://unpkg.com/gitalk@1.8.0/dist/gitalk.min.js"></script>
+  <script>
+    if (document.getElementById('gitalk-container')) {
+      const rawId = "2026/02/hexo-blog-setup/";
+      const normalizedId = (rawId || location.pathname).replace(/\/$/, '');
+      const issueId = normalizedId.length > 49 ? normalizedId.slice(0, 49) : normalizedId;
+      const owner = 'binq200108';
+      const admin = ["binq200108"];
+      const gitalk = new Gitalk({
+        clientID: 'Ov23liyMFmI3DaWkxu8k',
+        clientSecret: 'e972cb0e3c3b5397a39272e1731d6dd95761c615',
+        repo: 'binq200108.github.io',
+        owner,
+        admin: admin.length ? admin : (owner ? [owner] : []),
+        id: issueId,
+        
+        language: 'zh-CN',
+        distractionFreeMode: false,
+      });
+      gitalk.render('gitalk-container');
+    }
+  </script>
+  
+</body>
+</html>

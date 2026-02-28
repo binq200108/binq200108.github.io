@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="320" height="320" fill="none">
+  <!-- ✦ 4-point sparkle (large) -->
+  <path d="M52 14l3 12 12 3-12 3-3 12-3-12-12-3 12-3z" fill="#c2bbb2" opacity="0.75"/>
+
+  <!-- ◇ Diamond outline -->
+  <path d="M210 42l12 12-12 12-12-12z" stroke="#c2bbb2" stroke-width="0.9"/>
+
+  <!-- + Plus sign -->
+  <line x1="138" y1="18" x2="138" y2="38" stroke="#c2bbb2" stroke-width="0.9"/>
+  <line x1="128" y1="28" x2="148" y2="28" stroke="#c2bbb2" stroke-width="0.9"/>
+
+  <!-- ✦ Small sparkle (top-right) -->
+  <path d="M280 22l2 7 7 2-7 2-2 7-2-7-7-2 7-2z" fill="#c2bbb2" opacity="0.55"/>
+
+  <!-- ○ Circle outline -->
+  <circle cx="278" cy="105" r="6.5" stroke="#c2bbb2" stroke-width="0.9"/>
+
+  <!-- • Solid dot -->
+  <circle cx="82" cy="105" r="2.2" fill="#c2bbb2" opacity="0.7"/>
+
+  <!-- ✦ Sparkle (mid) -->
+  <path d="M182 132l2 8 8 2-8 2-2 8-2-8-8-2 8-2z" fill="#c2bbb2" opacity="0.6"/>
+
+  <!-- ◇ Filled diamond (small) -->
+  <path d="M105 160l5 5-5 5-5-5z" fill="#c2bbb2" opacity="0.4"/>
+
+  <!-- △ Triangle outline -->
+  <path d="M42 205l10 17H32z" stroke="#c2bbb2" stroke-width="0.9"/>
+
+  <!-- ✕ X cross -->
+  <line x1="252" y1="210" x2="264" y2="222" stroke="#c2bbb2" stroke-width="0.9"/>
+  <line x1="252" y1="222" x2="264" y2="210" stroke="#c2bbb2" stroke-width="0.9"/>
+
+  <!-- ○ Small ring -->
+  <circle cx="125" cy="252" r="4.5" stroke="#c2bbb2" stroke-width="0.9"/>
+
+  <!-- • Tiny dot -->
+  <circle cx="295" cy="185" r="1.6" fill="#c2bbb2" opacity="0.7"/>
+
+  <!-- ✦ Sparkle (bottom-left) -->
+  <path d="M25 280l2 7 7 2-7 2-2 7-2-7-7-2 7-2z" fill="#c2bbb2" opacity="0.5"/>
+
+  <!-- + Small plus (bottom-right area) -->
+  <line x1="220" y1="275" x2="220" y2="290" stroke="#c2bbb2" stroke-width="0.8"/>
+  <line x1="213" y1="282" x2="227" y2="282" stroke="#c2bbb2" stroke-width="0.8"/>
+
+  <!-- ○ Dot (mid-left) -->
+  <circle cx="18" cy="140" r="1.8" fill="#c2bbb2" opacity="0.6"/>
+
+  <!-- ◇ Diamond outline (small, mid-right) -->
+  <path d="M300 148l6 6-6 6-6-6z" stroke="#c2bbb2" stroke-width="0.7"/>
+</svg>
