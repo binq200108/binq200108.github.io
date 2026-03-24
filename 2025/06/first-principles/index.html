@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
+  <meta name="color-scheme" content="light dark">
+  <title>第一性原理：从本质出发思考问题 | binq</title>
+  <meta name="description" content="第一性原理是最强大的思维工具之一，它要求我们回到事物最基本的真理，从那里开始推理。">
+  <meta name="author" content="binq">
+  <link rel="alternate" type="application/atom+xml" title="binq" href="/feed.xml">
+  <meta property="og:type" content="blog">
+  <meta property="og:title" content="第一性原理：从本质出发思考问题">
+  <meta property="og:site_name" content="binq">
+  <script>
+    (function () {
+      var t = null;
+      try {
+        t = window.localStorage ? localStorage.getItem('theme') : null;
+      } catch (_err) {
+        t = null;
+      }
+      if (t) {
+        document.documentElement.setAttribute('data-theme', t);
+      } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.documentElement.setAttribute('data-theme', 'dark');
+      }
+    })();
+  </script>
+  <style>
+    html,
+    body {
+      background: #fdfdfd;
+      color: #111111;
+    }
+    html[data-theme="dark"],
+    html[data-theme="dark"] body {
+      background: #111111;
+      color: #e4e6eb;
+    }
+    @media (prefers-color-scheme: dark) {
+      html:not([data-theme="light"]),
+      html:not([data-theme="light"]) body {
+        background: #111111;
+        color: #e4e6eb;
+      }
+    }
+  </style>
+  <link rel="stylesheet" href="/css/font-face.css">
+  
+  <link rel="stylesheet" href="https://unpkg.com/gitalk@1.8.0/dist/gitalk.css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  
+<meta name="generator" content="Hexo 8.1.1"></head>
+<body>
+  <div class="bg-dots" id="bgDots"></div>
+  <div class="reading-progress" id="readingProgress"></div>
+  <header class="header">
+  <div class="header-left">
+    <div class="logo">
+      <a href="/">binq</a>
+    </div>
+    <nav class="nav-links">
+      
+      <a href="/">Home</a>
+      
+      <a href="/archives">Archives</a>
+      
+      <a href="/about">About</a>
+      
+    </nav>
+  </div>
+  <div class="header-right">
+    <button class="icon-btn" id="darkModeToggle" title="Toggle dark mode" aria-label="Toggle dark mode">
+      <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+      <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+    </button>
+    <a href="/feed.xml" class="icon-btn" title="RSS" aria-label="RSS Feed">
+      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg>
+    </a>
+  </div>
+  <div class="header-mobile-row" aria-label="Mobile quick navigation">
+    <nav class="mobile-nav-links">
+      
+      <a href="/">Home</a>
+      
+      <a href="/archives">Archives</a>
+      
+      <a href="/about">About</a>
+      
+    </nav>
+    
+    <div class="mobile-sidebar-shortcuts">
+      <button class="icon-btn mobile-context-btn" id="mobileTocTrigger" title="目录" aria-label="Open table of contents" aria-controls="tocSheet" aria-expanded="false">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="6" x2="21" y2="6"></line><line x1="7" y1="12" x2="21" y2="12"></line><line x1="7" y1="18" x2="21" y2="18"></line><line x1="3" y1="6" x2="3.01" y2="6"></line><line x1="3" y1="12" x2="3.01" y2="12"></line><line x1="3" y1="18" x2="3.01" y2="18"></line></svg>
+      </button>
+      <button class="icon-btn mobile-context-btn" id="mobileSeriesTrigger" title="系列" aria-label="Open series navigation" aria-controls="seriesSheet" aria-expanded="false">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="4" rx="1"></rect><rect x="3" y="10" width="18" height="4" rx="1"></rect><rect x="3" y="16" width="18" height="4" rx="1"></rect></svg>
+      </button>
+    </div>
+    
+  </div>
+</header>
+
+  <main class="main-container">
+    
+
+
+<aside class="sidebar-container sidebar-left" id="tocSidebar">
+  <div class="menu-icon">
+    <svg viewBox="0 0 24 24" width="20" height="20"><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"></path></svg>
+  </div>
+  <div class="toc-wrapper">
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E7%AC%AC%E4%B8%80%E6%80%A7%E5%8E%9F%E7%90%86"><span class="toc-text">什么是第一性原理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8A%95%E8%B5%84%E4%B8%AD%E7%9A%84%E7%AC%AC%E4%B8%80%E6%80%A7%E5%8E%9F%E7%90%86"><span class="toc-text">投资中的第一性原理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%87%AA%E7%84%B6%E7%95%8C%E7%9A%84%E7%AC%AC%E4%B8%80%E6%80%A7%E5%8E%9F%E7%90%86"><span class="toc-text">自然界的第一性原理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%8E%E5%88%86%E8%A7%A3%E5%88%B0%E9%87%8D%E6%9E%84"><span class="toc-text">从分解到重构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8B%BC%E8%B4%B4%E4%B8%8E%E7%BB%84%E5%90%88"><span class="toc-text">拼贴与组合</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E7%BB%83%E4%B9%A0"><span class="toc-text">如何练习</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%86%99%E5%9C%A8%E6%9C%80%E5%90%8E"><span class="toc-text">写在最后</span></a></li></ol>
+  </div>
+</aside>
+
+
+
+<aside class="sidebar-container sidebar-right">
+  <div class="sidebar-header">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="var(--text)"><path d="M10 20h4V4h-4v16zm-6 0h4v-8H4v8zM16 9v11h4V9h-4z"></path></svg>
+    系列 - 认知成长
+  </div>
+  <ul class="sidebar-list">
+    
+    <li class="sidebar-item">
+      <a href="/2026/02/inversion-thinking/">反转思维：从失败中寻找成功的路径</a>
+    </li>
+    
+    <li class="sidebar-item active">
+      <a href="/2025/06/first-principles/">第一性原理：从本质出发思考问题</a>
+    </li>
+    
+  </ul>
+</aside>
+
+
+
+<div class="container">
+  <article class="post">
+    <div class="post-header">
+      <h1 class="post-detail-title">第一性原理：从本质出发思考问题</h1>
+      <div class="post-detail-meta" aria-label="文章元信息">
+        <span class="meta-chip">
+          <time datetime="2025-06-13">2025-06-13</time>
+        </span>
+        
+        <span class="meta-chip">
+          <a href="/tags/%E6%80%9D%E7%BB%B4%E6%A8%A1%E5%9E%8B/" class="category-link">#思维模型</a>
+          
+          <span class="meta-tags-more">
+            <button class="meta-tags-toggle" type="button" aria-expanded="false"
+                    aria-label="显示所有标签">+2</button>
+            <span class="meta-tags-dropdown">
+              
+              <a href="/tags/%E7%AC%AC%E4%B8%80%E6%80%A7%E5%8E%9F%E7%90%86/" class="meta-tags-dropdown-item">#第一性原理</a>
+              
+              <a href="/tags/%E7%8B%AC%E7%AB%8B%E6%80%9D%E8%80%83/" class="meta-tags-dropdown-item">#独立思考</a>
+              
+            </span>
+          </span>
+          
+        </span>
+        
+        <span class="meta-chip">1596 字</span>
+        
+        <span class="meta-chip">23 图</span>
+        
+        <span class="meta-chip">约 7 分钟阅读</span>
+      </div>
+    </div>
+
+    
+
+    
+    <div class="post-cover-large">
+      <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1200&q=80" alt="第一性原理：从本质出发思考问题" width="800" height="450" loading="eager" fetchpriority="high" decoding="async">
+      
+
+<span class="cover-meta-badge cover-meta-badge--source" aria-label="封面来源信息">
+  
+  <svg class="cover-meta-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+    <path d="M12 9a3.75 3.75 0 100 7.5A3.75 3.75 0 0012 9z" />
+    <path fill-rule="evenodd" d="M9.344 3.071a49.52 49.52 0 015.312 0c.967.052 1.83.585 2.332 1.39l.821 1.317c.24.383.645.643 1.11.71.386.054.77.113 1.152.177 1.432.239 2.429 1.493 2.429 2.909V18a3 3 0 01-3 3h-15a3 3 0 01-3-3V9.574c0-1.416.997-2.67 2.429-2.909.382-.064.766-.123 1.151-.178a1.56 1.56 0 001.11-.71l.822-1.315a2.942 2.942 0 012.332-1.39zM6.75 12.75a5.25 5.25 0 1110.5 0 5.25 5.25 0 01-10.5 0zm12-1.5a.75.75 0 100-1.5.75.75 0 000 1.5z" clip-rule="evenodd" />
+  </svg>
+  
+  <span class="cover-meta-text">图片来源: Unsplash</span>
+</span>
+
+
+    </div>
+    
+
+    <div class="post-content markdown-body">
+      <p>第一性原理是最强大的思维工具之一，它要求我们回到事物最基本的真理，从那里开始推理。这种思维方式帮助我们跳出经验主义的局限，找到问题的本质。</p>
+<span id="more"></span>
+
+<h2 id="什么是第一性原理"><a href="#什么是第一性原理" class="headerlink" title="什么是第一性原理"></a>什么是第一性原理</h2><p>亚里士多德将第一性原理定义为”认识事物的第一基础”。在实践中，它意味着：</p>
+<ul>
+<li><strong>不依赖类比推理</strong> — “别人怎么做”不是你应该怎么做的理由</li>
+<li><strong>分解到最基本的事实</strong> — 什么是你确定为真的？</li>
+<li><strong>从基本事实重新构建</strong> — 基于这些事实，逻辑上应该怎么做？</li>
+</ul>
+<p>类比思维是一种捷径：看到别人做了什么，我们也照着做。这在大多数时候是高效的，但它的局限在于——你永远无法通过模仿超越被模仿者。</p>
+<p><img src="https://images.unsplash.com/photo-1462331940025-496dfbfc7564?auto=format&fit=crop&w=1600&q=80" alt="宇宙中的基本法则，是一切复杂现象背后的简单规律" class="cg-lazy" loading="lazy" decoding="async"></p><div class="img-caption">宇宙中的基本法则，是一切复杂现象背后的简单规律</div>
+<p>万物运行的底层，是极其简洁的规律。从牛顿三大定律到热力学定律，从量子力学到相对论，每一次物理学的重大突破，都是回到第一性原理的结果。</p>
+<figure class="photo-figure">
+  <div class="photo-single portrait">
+    <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=800&q=80" alt="仰望山峰 — 回到本质需要勇气"
+      data-camera="SONY XXXX-XX"
+      data-lens="FE 28mm F2.3 GM"
+      data-iso="100"
+      data-focal="32mm"
+      data-aperture="ƒ4"
+      data-shutter="1/160s"
+      data-location="深圳·XXX山" class="cg-lazy" loading="lazy" decoding="async">
+  </div>
+  <figcaption>回到本质需要仰望的勇气，也需要俯身的耐心</figcaption>
+</figure>
+
+<figure class="photo-figure">
+  <div class="live-photo" data-live-video="https://cdn.jsdelivr.net/gh/timerring/scratchpad2023/2024/2025-05-16-15-48-05.mp4">
+    <img class="live-photo-image" src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1400&q=80" alt="海面与夕光的实况瞬间">
+    <video class="live-photo-video" playsinline preload="metadata"></video>
+    <button class="live-photo-toggle" type="button" aria-label="播放实况" aria-pressed="false">实况</button>
+  </div>
+  <figcaption>实况图示例：左上角实况图标；桌面端悬停自动播放，移动端点图标播放；点击图片可像普通图片一样进入预览</figcaption>
+</figure>
+
+<h2 id="投资中的第一性原理"><a href="#投资中的第一性原理" class="headerlink" title="投资中的第一性原理"></a>投资中的第一性原理</h2><p>投资的第一性原理是什么？</p>
+<blockquote>
+<p>一家公司的价值 &#x3D; 其未来所有现金流的折现值。</p>
+</blockquote>
+<p>这意味着：</p>
+<ul>
+<li>股价短期是投票机，长期是称重机</li>
+<li>你需要理解的是企业的本质，而不是市场的情绪</li>
+<li>估值必须基于对未来现金流的合理预估</li>
+</ul>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>思维方式</th>
+<th>特点</th>
+<th>适用场景</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>类比推理</td>
+<td>快速、基于经验</td>
+<td>日常决策、低风险情况</td>
+</tr>
+<tr>
+<td>第一性原理</td>
+<td>深入、基于事实</td>
+<td>重大决策、创新突破</td>
+</tr>
+<tr>
+<td>归纳推理</td>
+<td>从特殊到一般</td>
+<td>发现规律、建立理论</td>
+</tr>
+<tr>
+<td>演绎推理</td>
+<td>从一般到特殊</td>
+<td>验证假设、逻辑论证</td>
+</tr>
+</tbody></table></div>
+<p>巴菲特和芒格之所以成功，正是因为他们始终回到这个最基本的原则。当市场恐慌时，他们不看股价走势图，而是计算企业的内在价值。</p>
+<figure class="photo-figure">
+  <div class="photo-ratio r-43-34">
+    <img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&w=900&q=80" alt="市场数据分析"
+      data-camera="Nikon Z8"
+      data-lens="NIKKOR Z 24-70mm f/2.8 S"
+      data-iso="400"
+      data-focal="42mm"
+      data-aperture="ƒ5.6"
+      data-shutter="1/500s"
+      data-location="东京·丸之内" class="cg-lazy" loading="lazy" decoding="async">
+    <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=600&q=80" alt="财务计算"
+      data-camera="Canon EOS R5"
+      data-lens="RF 50mm F1.2L USM"
+      data-iso="200"
+      data-focal="50mm"
+      data-aperture="ƒ2.8"
+      data-shutter="1/250s"
+      data-location="上海·陆家嘴" class="cg-lazy" loading="lazy" decoding="async">
+  </div>
+  <figcaption>4:3 横图 + 3:4 竖图 — 市场分析与深度计算</figcaption>
+</figure>
+
+<figure class="photo-figure">
+  <div class="photo-ratio r-34-43">
+    <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=600&q=80" alt="数据细节" class="cg-lazy" loading="lazy" decoding="async">
+    <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=900&q=80" alt="数据大盘" class="cg-lazy" loading="lazy" decoding="async">
+  </div>
+  <figcaption>3:4 竖图 + 4:3 横图 — 从微观细节到宏观全局</figcaption>
+</figure>
+
+<h2 id="自然界的第一性原理"><a href="#自然界的第一性原理" class="headerlink" title="自然界的第一性原理"></a>自然界的第一性原理</h2><p>自然界是第一性原理最好的老师。万物的复杂表象之下，隐藏着简洁的基本规律——物理定律、数学结构、进化法则。从雪花的六角对称到银河的螺旋臂，从 DNA 的双螺旋到蜂巢的正六边形，同样的基本原理反复塑造着这个世界。</p>
+<figure class="photo-figure">
+  <div class="photo-grid col-3">
+    <img src="https://images.unsplash.com/photo-1635070041078-e363dbe005cb?auto=format&fit=crop&w=600&q=80" alt="数学公式" class="cg-lazy" loading="lazy" decoding="async">
+    <img src="https://images.unsplash.com/photo-1509228468518-180dd4864904?auto=format&fit=crop&w=600&q=80" alt="几何结构" class="cg-lazy" loading="lazy" decoding="async">
+    <img src="https://images.unsplash.com/photo-1501594907352-04cda38ebc29?auto=format&fit=crop&w=600&q=80" alt="光与能量" class="cg-lazy" loading="lazy" decoding="async">
+  </div>
+  <figcaption>一排三图 — 数学、几何与能量，自然界最基本的语言</figcaption>
+</figure>
+
+<p>从宏观到微观，自然的秩序无处不在。海岸线的分形、树木的分支、河流的网络——它们都遵循着相同的基本模式。</p>
+<figure class="photo-figure">
+  <div class="photo-grid col-4">
+    <img src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=500&q=80" alt="森林" class="cg-lazy" loading="lazy" decoding="async">
+    <img src="https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=500&q=80" alt="山谷" class="cg-lazy" loading="lazy" decoding="async">
+    <img src="https://images.unsplash.com/photo-1470252649378-9c29740c9fa8?auto=format&fit=crop&w=500&q=80" alt="田野" class="cg-lazy" loading="lazy" decoding="async">
+    <img src="https://images.unsplash.com/photo-1472214103451-9374bd1c798e?auto=format&fit=crop&w=500&q=80" alt="日落" class="cg-lazy" loading="lazy" decoding="async">
+  </div>
+  <figcaption>一排四图 — 森林、山谷、田野、日落，自然的四种面貌</figcaption>
+</figure>
+
+<h2 id="从分解到重构"><a href="#从分解到重构" class="headerlink" title="从分解到重构"></a>从分解到重构</h2><p>第一性原理的实践可以分为两个阶段：<strong>分解</strong>和<strong>重构</strong>。</p>
+<p><strong>分解</strong>是将复杂问题拆解到不可再分的基本事实。就像拆解一台机器，直到你看到每一个零件的本来面目。</p>
+<p><strong>重构</strong>是基于这些基本事实，重新组合出解决方案。这个过程往往能产生颠覆性的创新，因为你不受既有方案的束缚。</p>
+<figure class="photo-figure">
+  <div class="photo-ratio r-32-23">
+    <img src="https://images.unsplash.com/photo-1487058792275-0ad4aaf24ca7?auto=format&fit=crop&w=1000&q=80" alt="代码逻辑" class="cg-lazy" loading="lazy" decoding="async">
+    <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=600&q=80" alt="电路板" class="cg-lazy" loading="lazy" decoding="async">
+  </div>
+  <figcaption>3:2 横图 + 2:3 竖图 — 软件的逻辑与硬件的结构</figcaption>
+</figure>
+
+<p>Elon Musk 在 SpaceX 的实践就是经典案例。当所有人都说火箭发射太贵时，他没有接受这个”常识”，而是回到第一性原理：火箭的原材料成本是多少？铝合金、碳纤维、钛合金——这些材料的成本只占火箭售价的 2%。于是他决定自己造火箭。</p>
+<p>用同样的思维方式，我们可以从第一性原理出发估算企业的内在价值：</p>
+<section class="cg-code-shell"><div class="cg-code-head"><span class="cg-code-file"><svg class="cg-code-file-icon" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path></svg><span class="cg-code-title" title="snippet.python">snippet.python</span></span><button class="cg-code-copy" type="button" aria-label="复制代码"><svg class="cg-copy-icon" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg></button></div><div class="cg-code-body"><div class="cg-code-scroll"><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 简单的内在价值估算 (DCF 模型)</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">intrinsic_value</span>(<span class="params">fcf, growth_rate, discount_rate, years=<span class="number">10</span></span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    fcf: 自由现金流 (亿元)</span></span><br><span class="line"><span class="string">    growth_rate: 预期增长率</span></span><br><span class="line"><span class="string">    discount_rate: 折现率</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    value = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> year <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, years + <span class="number">1</span>):</span><br><span class="line">        future_cf = fcf * (<span class="number">1</span> + growth_rate) ** year</span><br><span class="line">        value += future_cf / (<span class="number">1</span> + discount_rate) ** year</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 终值: 永续增长模型 (假设长期增长率 3%)</span></span><br><span class="line">    terminal_growth = <span class="number">0.03</span></span><br><span class="line">    terminal_value = (fcf * (<span class="number">1</span> + growth_rate) ** years * (<span class="number">1</span> + terminal_growth)) \</span><br><span class="line">                     / (discount_rate - terminal_growth)</span><br><span class="line">    value += terminal_value / (<span class="number">1</span> + discount_rate) ** years</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">round</span>(value, <span class="number">2</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 示例: FCF=100亿, 增长率8%, 折现率10%</span></span><br><span class="line">result = intrinsic_value(<span class="number">100</span>, <span class="number">0.08</span>, <span class="number">0.10</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;内在价值估算: <span class="subst">&#123;result&#125;</span> 亿元&quot;</span>)</span><br></pre></td></tr></table></figure></div><div class="cg-code-fade" aria-hidden="true"></div></div><div class="cg-code-toggle-row"><button class="cg-code-toggle" type="button" aria-expanded="false" aria-label="展开代码块"><svg viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></button></div></section>
+
+<figure class="photo-figure">
+  <div class="photo-ratio r-23-32">
+    <img src="https://images.unsplash.com/photo-1473448912268-2022ce9509d8?auto=format&fit=crop&w=600&q=80" alt="森林小径" class="cg-lazy" loading="lazy" decoding="async">
+    <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=1000&q=80" alt="雪山全景" class="cg-lazy" loading="lazy" decoding="async">
+  </div>
+  <figcaption>2:3 竖图 + 3:2 横图 — 窄径通向广阔</figcaption>
+</figure>
+
+<h2 id="拼贴与组合"><a href="#拼贴与组合" class="headerlink" title="拼贴与组合"></a>拼贴与组合</h2><p>理解了分解与重构，就能看到事物之间隐藏的关联——看似不相关的领域，往往共享相同的底层原理。</p>
+<figure class="photo-figure">
+  <div class="photo-mosaic">
+    <div class="mosaic-stack">
+      <img src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=800&q=80" alt="数据流" class="cg-lazy" loading="lazy" decoding="async">
+      <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=800&q=80" alt="协作空间" class="cg-lazy" loading="lazy" decoding="async">
+    </div>
+    <div class="mosaic-full">
+      <img src="https://images.unsplash.com/photo-1456406644174-8ddd4cd52a06?auto=format&fit=crop&w=800&q=80" alt="纵深结构" class="cg-lazy" loading="lazy" decoding="async">
+    </div>
+  </div>
+  <figcaption>拼贴布局 — 左2小 + 右1大，数据、协作与纵深</figcaption>
+</figure>
+
+<h2 id="如何练习"><a href="#如何练习" class="headerlink" title="如何练习"></a>如何练习</h2><p>第一性原理不是天赋，而是一种可以训练的思维习惯。</p>
+<ol>
+<li>面对一个问题，先问”为什么”</li>
+<li>对每个回答继续追问”为什么”</li>
+<li>直到你到达不可再分的基本事实</li>
+<li>从这些事实出发，重新构建你的理解</li>
+</ol>
+<p>关键在于保持好奇心，拒绝”大家都是这么做的”这类回答。每一次你选择追问本质而非接受惯例，都是在强化这种思维模式。</p>
+<figure class="photo-figure">
+  <div class="photo-flex">
+    <div class="wide">
+      <img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=1200&q=80" alt="星空下的雪山" class="cg-lazy" loading="lazy" decoding="async">
+    </div>
+    <div class="narrow">
+      <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80" alt="湖光山色" class="cg-lazy" loading="lazy" decoding="async">
+    </div>
+  </div>
+  <figcaption>宽窄组合 — 广角视野与聚焦一隅</figcaption>
+</figure>
+
+<h2 id="写在最后"><a href="#写在最后" class="headerlink" title="写在最后"></a>写在最后</h2><p>第一性原理不是要你否定一切经验，而是在关键决策时，有能力回到最本质的层面去思考。它与类比思维并不矛盾——日常小事用类比提高效率，重大决策用第一性原理确保方向正确。</p>
+<p>正如费曼所说：”我不能创造的东西，我就不理解。”真正的理解，始于第一性原理。test</p>
+
+    </div>
+
+    
+    <div class="post-tags-footer">
+      
+      <a href="/tags/%E6%80%9D%E7%BB%B4%E6%A8%A1%E5%9E%8B/" class="tag-item"><svg class="tag-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 01-2.83 0L2 12V2h10l8.59 8.59a2 2 0 010 2.82z"/><circle cx="7" cy="7" r="1.5" fill="currentColor" stroke="none"/></svg>思维模型</a>
+      
+      <a href="/tags/%E7%AC%AC%E4%B8%80%E6%80%A7%E5%8E%9F%E7%90%86/" class="tag-item"><svg class="tag-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 01-2.83 0L2 12V2h10l8.59 8.59a2 2 0 010 2.82z"/><circle cx="7" cy="7" r="1.5" fill="currentColor" stroke="none"/></svg>第一性原理</a>
+      
+      <a href="/tags/%E7%8B%AC%E7%AB%8B%E6%80%9D%E8%80%83/" class="tag-item"><svg class="tag-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 01-2.83 0L2 12V2h10l8.59 8.59a2 2 0 010 2.82z"/><circle cx="7" cy="7" r="1.5" fill="currentColor" stroke="none"/></svg>独立思考</a>
+      
+    </div>
+    
+
+    <nav class="post-nav">
+      
+      <a href="/2026/02/inversion-thinking/" class="post-nav-item prev">
+        <span class="post-nav-label">上一篇</span>
+        <span class="post-nav-title">反转思维：从失败中寻找成功的路径</span>
+      </a>
+      
+      
+    </nav>
+
+    
+    <div class="post-comments">
+      <h3 class="comments-title">评论</h3>
+      
+      <p class="comment-note">未注册 GitHub？可邮件联系：<a href="mailto:binq200108@163.com">binq200108@163.com</a></p>
+      
+      <div id="gitalk-container"></div>
+    </div>
+    
+
+    <footer class="post-footer">
+      <div class="copyright">
+        <p>&copy; 2026 binq</p>
+      </div>
+    </footer>
+  </article>
+</div>
+
+  </main>
+  <footer class="site-footer">
+  <div class="footer-inner">
+    <p class="copyright">
+      &copy; 2026 - 2026 binq.
+      Powered by <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a>.
+    </p>
+  </div>
+</footer>
+
+  <!-- Back to Top -->
+  <button class="back-to-top" id="backToTop" aria-label="Back to top">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"></polyline></svg>
+  </button>
+  <!-- Selection Quote Tooltip -->
+  <div class="selection-tooltip" id="selectionTooltip" aria-hidden="true">
+    <button class="selection-tooltip-btn" id="selectionQuoteBtn" type="button">
+      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M10 11V7a1 1 0 0 0-1-1H5a1 1 0 0 0-1 1v4a1 1 0 0 0 1 1h2.5L5 17h2.5l2.5-5V7zm10 0V7a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v4a1 1 0 0 0 1 1h2.5L15 17h2.5l2.5-5V7z"/></svg>
+      引用评论
+    </button>
+  </div>
+  <!-- Mobile Bottom Sheets -->
+  <div class="mobile-sheet-backdrop" id="mobileSheetBackdrop" aria-hidden="true"></div>
+  <section class="mobile-sheet" id="tocSheet" aria-hidden="true">
+    <div class="mobile-sheet-grip"></div>
+    <div class="mobile-sheet-head">
+      <h3 class="mobile-sheet-title">目录</h3>
+      <button class="mobile-sheet-close" data-close-sheet="tocSheet" aria-label="Close toc">&times;</button>
+    </div>
+    <div class="mobile-sheet-body" id="tocSheetBody"></div>
+  </section>
+  <section class="mobile-sheet" id="seriesSheet" aria-hidden="true">
+    <div class="mobile-sheet-grip"></div>
+    <div class="mobile-sheet-head">
+      <h3 class="mobile-sheet-title" id="seriesSheetTitle">系列</h3>
+      <button class="mobile-sheet-close" data-close-sheet="seriesSheet" aria-label="Close series">&times;</button>
+    </div>
+    <div class="mobile-sheet-body" id="seriesSheetBody"></div>
+  </section>
+  <!-- Lightbox -->
+  <div id="lightbox">
+    <!-- Corner controls (theme-aware) -->
+    <span class="lb-counter" id="lbCounter"></span>
+    <button class="lb-close" id="lbClose" aria-label="Close">&times;</button>
+    <button class="lb-btn lb-prev" id="lbPrev" aria-label="Previous">&#10094;</button>
+    <button class="lb-btn lb-next" id="lbNext" aria-label="Next">&#10095;</button>
+    <!-- EXIF info bar (top center, dynamically populated) -->
+    <div class="lb-exif" id="lbExif"></div>
+    <!-- Image area -->
+    <div class="lightbox-content">
+      <img id="lightbox-img" src="" alt="">
+      <img id="lightbox-img-buffer" src="" alt="" aria-hidden="true">
+    </div>
+    <!-- Bottom toolbar (zoom + actions only) -->
+    <div class="lb-toolbar" id="lbToolbar">
+      <button class="lb-tool-btn" id="lbZoomOut" title="缩小 (-)" aria-label="缩小">
+        <svg class="lb-icon" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line><line x1="8" y1="11" x2="14" y2="11"></line></svg>
+      </button>
+      <span class="lb-info-text" id="lbZoomLevel">100%</span>
+      <button class="lb-tool-btn" id="lbZoomIn" title="放大 (+)" aria-label="放大">
+        <svg class="lb-icon" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line><line x1="11" y1="8" x2="11" y2="14"></line><line x1="8" y1="11" x2="14" y2="11"></line></svg>
+      </button>
+      <button class="lb-tool-btn" id="lbZoomReset" title="1:1 / 适应屏幕 (1)" aria-label="1:1 或适应屏幕">
+        <svg class="lb-icon" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" ry="2" stroke-width="2"></rect><text x="12" y="15" font-size="9" font-weight="bold" fill="currentColor" stroke="none" text-anchor="middle" font-family="Arial, sans-serif">1:1</text></svg>
+      </button>
+      <div class="lb-divider"></div>
+      <button class="lb-tool-btn" id="lbRotate" title="旋转" aria-label="Rotate">
+        <svg class="lb-icon" viewBox="0 0 24 24"><path d="M21 12a9 9 0 1 1-9-9c2.52 0 4.93 1 6.74 2.74L21 8"></path><path d="M21 3v5h-5"></path></svg>
+      </button>
+    </div>
+  </div>
+  <script src="/js/main.js"></script>
+  
+  <script src="https://unpkg.com/gitalk@1.8.0/dist/gitalk.min.js"></script>
+  <script>
+    if (document.getElementById('gitalk-container')) {
+      const rawId = "2025/06/first-principles/";
+      const normalizedId = (rawId || location.pathname).replace(/\/$/, '');
+      const issueId = normalizedId.length > 49 ? normalizedId.slice(0, 49) : normalizedId;
+      const owner = 'binq200108';
+      const admin = ["binq200108"];
+      const gitalk = new Gitalk({
+        clientID: 'Ov23liyMFmI3DaWkxu8k',
+        clientSecret: 'e972cb0e3c3b5397a39272e1731d6dd95761c615',
+        repo: 'binq200108.github.io',
+        owner,
+        admin: admin.length ? admin : (owner ? [owner] : []),
+        id: issueId,
+        
+        language: 'zh-CN',
+        distractionFreeMode: false,
+      });
+      gitalk.render('gitalk-container');
+    }
+  </script>
+  
+</body>
+</html>
